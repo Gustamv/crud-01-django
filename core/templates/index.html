@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Hello World!
+
+    <ul>
+        <!-- {% eh para comandos e {{ eh para variaveis -->
+        {% for pessoa in pessoas %}
+        <li>
+            {{ pessoa.id }} - {{ pessoa.nome }} 
+            <a href="{% url 'editar' pessoa.id %}">Editar</a>
+            <a href="{% url 'deletar' pessoa.id %}">Deletar</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- form para cadastrar uma pessoa nova -->
+    <form action="{% url "salvar" %}" method="POST">
+        <!-- esse crsf protege o django de hack -->
+        {% csrf_token %}
+        <input type="text" name="nome">
+        <button type="submit">Salvar</button>
+    </form>
+
+</body>
+</html>
